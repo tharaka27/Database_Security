@@ -1,14 +1,14 @@
 import configparser
-import os.path
 from os import path
 import hashlib
+import sys
+
+from roles.Administrator import Administrator
+from roles.Doctor import Doctor
+from roles.Nurse import Nurse
+from roles.Patient import Patient
 
 def main():
-    
-    #if(path.exists('database_roles.ini')):
-    #    os.remove('database_roles.ini')
-    #    print("File Removed!")
-
     if(not(path.exists('database_roles.ini'))):
         config = configparser.ConfigParser()
         config['DEFAULT'] = {'isConfigured': 'True'}
@@ -69,11 +69,70 @@ def main():
             print("Unsuccessfully login")
             exit(0)
 
-
         print("Successfully login as " + user_role)
+        if(user_role == 'Administrator'):
+            r = Administrator(username,"Ratnayake")
+            
+        elif(user_role == 'Doctor'):
+            r = Doctor(username,"Ratnayake")
+            
+        elif(user_role == 'Nurse'):
+            r = Nurse(username,"Ratnayake")
+            
+        elif(user_role == 'Patient'):
+            r = Patient(username,"Ratnayake")
+            
+        r.load_settings()
+
+        string = ("1.Enter 'help' to view possible functionality\n2.Enter 'Search' to search a data\n"
+                  "3.Enter 'Add' to add new data\n4.Enter 'Update' to update existing data\n"
+                  "5.Enter 'Delete' to delete data\n6.Enter 'View' to view this again.\n>>>")
+
+        #print(string, end="")
+        while(True):
+            x = input(string)
+            if(x == "help"):
+                r.print_possible_actions()
+            elif(x == "Search"):
+                x, y = map(str, input("Enter tablename<space>id:\n>>>").split(" "))
+                print(r.execute(x, 'Search', y))
+                print("\n\n")
+                
+            elif(x == "Add"):
+                table_name = input("Enter tablename :\n>>>")
+                if( r.isPossible(table_name, "Add")):
+                    config_data = configparser.ConfigParser()
+                    config_data.read('database_data.ini')
+                    dic = {}
+                    for key in config_data[table_name]:
+                        print(key)
+                    
+                else:
+                    print("Sorry you can perform such action")
+
+                
+            elif(x == "Update"):
+                x, y = map(str, input("Enter tablename<space>id:\n>>>").split(" "))
+                print(r.execute(x, 'Search', y))
+                print("\n\n")
+                
+            elif(x == "Delete"):
+                x, y = map(str, input("Enter tablename<space>id:\n>>>").split(" "))
+                print(r.execute(x, 'Search', y))
+                print("\n\n")
+                
+            elif(x == "View"):
+                print(string)
+            else:
+                print("Wrong command enter again")
+            
+        
         input("press any key to continue")
    
 
 if __name__== "__main__":
+    #print (sys.path)
+    
+    
     user_role = "";
     main()

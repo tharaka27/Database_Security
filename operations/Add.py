@@ -1,5 +1,6 @@
 import configparser
 import json
+import sys
 
 class Add:
     def __init__(self):
@@ -7,6 +8,7 @@ class Add:
 
     @staticmethod
     def addElemenet(table_name, data_dic):
+        print(sys.path[0])
         config = configparser.ConfigParser()
         config.read('database_data.ini')
         
@@ -15,9 +17,9 @@ class Add:
         for key in config[table_name]:
             if lastID < int(key):
                 lastID = int(key)
-        print(lastID + 1)
+        #print(lastID + 1)
 
-        print(str(json.dumps(data_dic)))
+        #print(str(json.dumps(data_dic)))
         config[table_name][str(lastID + 1)] = json.dumps(data_dic)
         with open('database_data.ini', 'w') as f:
             config.write(f)

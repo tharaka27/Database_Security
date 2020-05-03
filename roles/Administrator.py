@@ -1,4 +1,5 @@
-from Person import Person
+import sys
+from roles.Person import Person
 
 class Administrator(Person):
     
@@ -9,17 +10,14 @@ class Administrator(Person):
         Person.table_list = []
         Person.access = {}
             
-    def print_possible_actions(self):
-        print("1. Print hello world")
-
     def execute_action(self):
         print("1. Print hello world")
 
            
 
 
-x = Administrator("John", "Doe")
-print(x.getfname())
-print(x.getrole())
-x.load_settings()
-print(x.getaccessdic())
+#x = Administrator("John", "Doe")
+#print(x.getfname())
+#print(x.getrole())
+#x.load_settings()
+#print(x.getaccessdic())

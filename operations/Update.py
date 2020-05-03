@@ -1,5 +1,6 @@
 import configparser
 import json
+import sys
 
 class Update:
     def __init__(self):
@@ -28,9 +29,9 @@ class Update:
 #     Example Usage
 #
 #-------------------------------
-data_dic = {"street": "Bulugahawatta Road5", "town": "Kadawatha6"}   
-Update.updateElemenet("Addresses", "5" ,data_dic)
+#data_dic = {"street": "Bulugahawatta Road5", "town": "Kadawatha6"}   
+#Update.updateElemenet("Addresses", "5" ,data_dic)
 
-data_dic = "5,6" 
-Update.updateRelation("Managers", data_dic)
+#data_dic = "5,6" 
+#Update.updateRelation("Managers", data_dic)
 

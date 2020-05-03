@@ -1,4 +1,4 @@
-from Person import Person
+from roles.Person import Person
 
 class Patient(Person):
     
@@ -9,8 +9,7 @@ class Patient(Person):
         Person.table_list = []
         Person.access = {}
             
-    def print_possible_actions(self):
-        print("1. Print hello world")
+    
 
     def execute_action(self):
         print("1. Print hello world")
@@ -18,8 +17,9 @@ class Patient(Person):
            
 
 
-x = Patient("John", "Doe")
-print(x.getfname())
-print(x.getrole())
-x.load_settings()
-print(x.getaccessdic())
+#x = Patient("John", "Doe")
+#print(x.getfname())
+#print(x.getrole())
+#x.load_settings()
+#print(x.getaccessdic())
+#print(x.execute("Patients", 'Search', "1"))
