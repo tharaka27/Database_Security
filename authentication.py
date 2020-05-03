@@ -2,6 +2,7 @@ import configparser
 from os import path
 import hashlib
 import sys
+import json
 
 from roles.Administrator import Administrator
 from roles.Doctor import Doctor
@@ -103,9 +104,15 @@ def main():
                 if( r.isPossible(table_name, "Add")):
                     config_data = configparser.ConfigParser()
                     config_data.read('database_data.ini')
-                    dic = {}
-                    for key in config_data[table_name]:
-                        print(key)
+                    dic = json.loads(config_data[table_name]["1"])
+                    lis = dic.keys()
+                    data_dic = {}
+                    for i in lis:
+                        data_dic[i] = input("Please input "+ i + " : ")
+                    print("The following data will be added to tabel")
+                    print(data_dic)
+                    r.execute(table_name, 'Add', data_dic)    
+                        
                     
                 else:
                     print("Sorry you can perform such action")
