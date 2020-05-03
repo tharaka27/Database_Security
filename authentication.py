@@ -119,9 +119,19 @@ def main():
 
                 
             elif(x == "Update"):
-                x, y = map(str, input("Enter tablename<space>id:\n>>>").split(" "))
-                print(r.execute(x, 'Search', y))
-                print("\n\n")
+                table_name = input("Enter tablename :\n>>>")
+                idv = input("Enter id :\n>>>")
+                if( r.isPossible(table_name, "Update")):
+                    config_data = configparser.ConfigParser()
+                    config_data.read('database_data.ini')
+                    dic = json.loads(config_data[table_name]["1"])
+                    lis = dic.keys()
+                    data_dic = {}
+                    for i in lis:
+                        data_dic[i] = input("Please input "+ i + " : ")
+                    print("The following data will be updated")
+                    print(data_dic)
+                    r.execute(table_name, 'Update', data_dic, idv)
                 
             elif(x == "Delete"):
                 x, y = map(str, input("Enter tablename<space>id:\n>>>").split(" "))
